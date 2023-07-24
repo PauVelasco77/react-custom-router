@@ -1,35 +1,59 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react";
+import { EVENTS } from "./consts";
+
+function navigate(href) {
+  window.history.pushState({}, "", href);
+  // create personalized event
+  const navigationEvent = new Event(EVENTS.PUSHSTATE);
+  // dispatch event
+  window.dispatchEvent(navigationEvent);
+}
+
+function HomePage() {
+  return (
+    <>
+      <h1>Home</h1>
+      <p>this is the home page</p>
+      <button onClick={() => navigate("/about")}>Ir a Sobre nosotros</button>
+    </>
+  );
+}
+
+function AboutPage() {
+  return (
+    <>
+      <h1>About</h1>
+      <p>this is the about page</p>
+      <button onClick={() => navigate("/")}>Ir a Home</button>
+    </>
+  );
+}
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [currentPath, setCurrentPath] = useState(window.location.pathname);
+
+  useEffect(() => {
+    const onLocationChange = () => {
+      setCurrentPath(window.location.pathname);
+    };
+
+    window.addEventListener(EVENTS.PUSHSTATE, onLocationChange);
+    window.addEventListener(EVENTS.POPSTATE, onLocationChange);
+
+    return () => {
+      window.removeEventListener(EVENTS.PUSHSTATE, onLocationChange);
+      window.removeEventListener(EVENTS.POPSTATE, onLocationChange);
+    };
+  }, []);
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <main>
+        {currentPath === "/" && <HomePage />}
+        {currentPath === "/about" && <AboutPage />}
+      </main>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
