@@ -1,33 +1,7 @@
 import { useEffect, useState } from "react";
 import { EVENTS } from "./consts";
-
-function navigate(href) {
-  window.history.pushState({}, "", href);
-  // create personalized event
-  const navigationEvent = new Event(EVENTS.PUSHSTATE);
-  // dispatch event
-  window.dispatchEvent(navigationEvent);
-}
-
-function HomePage() {
-  return (
-    <>
-      <h1>Home</h1>
-      <p>this is the home page</p>
-      <button onClick={() => navigate("/about")}>Ir a Sobre nosotros</button>
-    </>
-  );
-}
-
-function AboutPage() {
-  return (
-    <>
-      <h1>About</h1>
-      <p>this is the about page</p>
-      <button onClick={() => navigate("/")}>Ir a Home</button>
-    </>
-  );
-}
+import HomePage from "./pages/Home";
+import AboutPage from "./pages/About";
 
 function App() {
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
