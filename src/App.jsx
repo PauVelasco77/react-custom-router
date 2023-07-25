@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-import { EVENTS } from "./consts";
 import HomePage from "./pages/Home";
 import AboutPage from "./pages/About";
 import Router from "./Router";

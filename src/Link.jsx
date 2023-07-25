@@ -18,6 +18,7 @@ export function Link({ target, to, ...props }) {
     if (isMainEvent && !isModifierPressed && isManageableEvent) {
       event.preventDefault(); // prevent default behavior
       navigate(to); // navigate with SPA
+      window.scrollTo(0, 0); // scroll to top
     }
   };
 
