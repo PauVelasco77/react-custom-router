@@ -11,6 +11,10 @@ const routes = [
     path: "/search/:query",
     Component: LazySearchPage,
   },
+  {
+    path: "/:lang/about",
+    Component: LazyAboutPage,
+  },
 ];
 
 function App() {
