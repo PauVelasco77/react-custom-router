@@ -1,16 +1,15 @@
 import { Suspense, lazy } from "react";
 import Route from "./Route";
 import Router from "./Router";
-import AboutPage from "./pages/About";
 import HomePage from "./pages/Home";
-import SearchPage from "./pages/Search";
 
-const LazyAboutPage = lazy(() => import("./pages/About"));
+const LazyAboutPage = lazy(() => import("./pages/About.jsx"));
+const LazySearchPage = lazy(() => import("./pages/Search.jsx"));
 
 const routes = [
   {
     path: "/search/:query",
-    Component: SearchPage,
+    Component: LazySearchPage,
   },
 ];
 
