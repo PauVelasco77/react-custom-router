@@ -1,5 +1,7 @@
 import { Link } from "../Link";
 
+console.log("About");
+
 export default function AboutPage() {
   return (
     <>
