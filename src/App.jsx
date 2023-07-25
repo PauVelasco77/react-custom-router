@@ -1,6 +1,7 @@
 import HomePage from "./pages/Home";
 import AboutPage from "./pages/About";
 import Router from "./Router";
+import SearchPage from "./pages/Search";
 
 const routes = [
   {
@@ -10,6 +11,10 @@ const routes = [
   {
     path: "/about",
     component: AboutPage,
+  },
+  {
+    path: "/search/:query",
+    component: SearchPage,
   },
 ];
 
